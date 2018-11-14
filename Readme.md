@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Andrew Kolesnikov](https://up.htmlacademy.ru/javascript/16/user/557561).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Долженко](https://htmlacademy.ru/profile/id926759).
 
 ---
 
