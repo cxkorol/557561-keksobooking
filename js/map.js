@@ -155,9 +155,6 @@ var createAdwArray = function () {
 };
 
 var adw = createAdwArray();
-
-console.log(adw);
-
 var showMap = document.querySelector('.map');
 var containerPin = showMap.querySelector('.map__pins');
 var similarMapPin = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -206,11 +203,10 @@ var renderCard = function (ad) {
   }
 
   // Добавление фотографий объявлений
-
   var photos = cardElement.querySelector('.popup__photos');
   for (var j = 0; j < ad.offer.photos.length; j++) {
     var newPhoto = document.createElement('img');
-    newPhoto.className = 'popup_photo';
+    newPhoto.className = 'popup__photo';
     newPhoto.width = PHOTO_WIDTH;
     newPhoto.height = PHOTO_HEIGHT;
     newPhoto.src = ad.offer.photos[j];
