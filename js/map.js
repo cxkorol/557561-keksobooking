@@ -64,6 +64,9 @@
 
   var OFFER_QUANTITY = 8;
 
+  var ENTER_KEY = 13;
+  var ESC_KEY = 27;
+
   // Нахождение случайного числа в диапазоне
   var getRandom = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -161,22 +164,23 @@
   };
 
   // Функция создания и отрисовки меток на карте
-  var renderPin = function (adwertisments) {
+  var renderPin = function (adwertisments, index) {
     var pinElement = similarMapPin.cloneNode(true);
 
     pinElement.style.left = adwertisments.location.coordX - PIN_WIDTH / 2 + 'px';
     pinElement.style.top = adwertisments.location.coordY - PIN_HEIGHT / 2 + 'px';
     pinElement.querySelector('img').src = adwertisments.author.avatar;
     pinElement.querySelector('img').alt = adwertisments.offer.title;
+    pinElement.setAttribute('data-id', index);
 
     return pinElement;
   };
 
   // Функция заполнения блока меток
-  var getPin = function () {
+  var getPins = function () {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < adwertisments.length; i++) {
-      fragment.appendChild(renderPin(adwertisments[i]));
+      fragment.appendChild(renderPin(adwertisments[i], i));
     }
     return fragment;
   };
@@ -249,8 +253,62 @@
   var similarMapCard = document.querySelector('#card').content.querySelector('.map__card');
   var mapFiltersContainer = showMap.querySelector('.map__filters-container');
 
-  containerPin.appendChild(getPin());
-  showMap.insertBefore(renderCard(adwertisments[getRandomUp(OFFER_QUANTITY)]), mapFiltersContainer);
-  showMap.classList.remove('map--faded');
+  // Модуль 4 - Подробности
 
+  var mapPin = document.querySelector('.map__pin--main');
+  var adForm = document.querySelector('.ad-form');
+
+  var removeDisabled = function () {
+    var fieldSet = adForm.querySelectorAll('fieldset');
+    adForm.classList.remove('ad-form-disabled');
+
+    for (var i = 0; i < fieldSet.length; i++) {
+      fieldSet[i].removeAttribute('disabled');
+    }
+  };
+
+  var activateState = function () {
+    showMap.classList.remove('map--faded');
+    containerPin.appendChild(getPins());
+    removeDisabled();
+    onPinClick();
+  };
+
+  mapPin.addEventListener('mouseup', function (evt) {
+    evt.preventDefault();
+    activateState();
+  });
+
+  var closeCardPopup = function () {
+    var card = document.querySelector('.map__card');
+    if (card) {
+      card.remove();
+    }
+  };
+
+  var activateCardPopup = function (pinId) {
+    var card = document.querySelector('.map__card');
+    if (card) {
+      closeCardPopup();
+    }
+    var newCard = renderCard(adwertisments[pinId]);
+    showMap.insertBefore(newCard, mapFiltersContainer);
+  };
+
+  var onPinClick = function () {
+    var pinList = containerPin.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < pinList.length; i++) {
+
+      pinList[i].addEventListener('click', function (evt) {
+        var button = evt.currentTarget;
+        var pinId = button.getAttribute('data-id');
+        activateCardPopup(pinId);
+
+        var closeButton = document.querySelector('.popup__close');
+        closeButton.addEventListener('click', function () {
+          closeCardPopup();
+        });
+      });
+    }
+  };
 })();
