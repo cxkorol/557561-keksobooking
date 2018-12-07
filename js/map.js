@@ -279,6 +279,12 @@
     activateState();
   });
 
+  mapPin.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEY) {
+      activateState();
+    }
+  });
+
   var closeCardPopup = function () {
     var card = document.querySelector('.map__card');
     if (card) {
@@ -308,6 +314,12 @@
         closeButton.addEventListener('click', function () {
           closeCardPopup();
         });
+      });
+
+      document.addEventListener('keydown', function (evt) {
+        if (evt.keyCode === ESC_KEY) {
+          closeCardPopup();
+        }
       });
     }
   };
