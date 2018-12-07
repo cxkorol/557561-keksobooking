@@ -267,23 +267,20 @@
     }
   };
 
+  var getLocationMapPinMain = function () {
+    var locationX = Math.round(parseInt(mapPin.style.left, 10)) + PIN_WIDTH / 2;
+    var locationY = Math.round(parseInt(mapPin.style.top, 10)) + PIN_HEIGHT / 2;
+    var inputAdress = adForm.querySelector('#address');
+
+    inputAdress.setAttribute('value', locationX + ', ' + locationY);
+  };
+
   var activateState = function () {
     showMap.classList.remove('map--faded');
     containerPin.appendChild(getPins());
     removeDisabled();
     onPinClick();
   };
-
-  mapPin.addEventListener('mouseup', function (evt) {
-    evt.preventDefault();
-    activateState();
-  });
-
-  mapPin.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEY) {
-      activateState();
-    }
-  });
 
   var closeCardPopup = function () {
     var card = document.querySelector('.map__card');
@@ -323,4 +320,18 @@
       });
     }
   };
+
+
+  mapPin.addEventListener('mouseup', function (evt) {
+    evt.preventDefault();
+    activateState();
+    getLocationMapPinMain();
+  });
+
+  mapPin.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEY) {
+      activateState();
+      getLocationMapPinMain();
+    }
+  });
 })();
