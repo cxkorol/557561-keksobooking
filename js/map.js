@@ -252,12 +252,10 @@
   var similarMapPin = document.querySelector('#pin').content.querySelector('.map__pin');
   var similarMapCard = document.querySelector('#card').content.querySelector('.map__card');
   var mapFiltersContainer = showMap.querySelector('.map__filters-container');
-
-  // Модуль 4 - Подробности
-
   var mapPin = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
 
+  // Функция удаления настроек неактивного состояния
   var removeDisabled = function () {
     var fieldSet = adForm.querySelectorAll('fieldset');
     adForm.classList.remove('ad-form-disabled');
@@ -267,14 +265,16 @@
     }
   };
 
+  // Функция получения координат главной точки
   var getLocationMapPinMain = function () {
-    var locationX = Math.round(parseInt(mapPin.style.left, 10)) + PIN_WIDTH / 2;
-    var locationY = Math.round(parseInt(mapPin.style.top, 10)) + PIN_HEIGHT / 2;
+    var locationX = Math.round(parseInt(mapPin.offsetLeft, 10)) + PIN_WIDTH / 2;
+    var locationY = Math.round(parseInt(mapPin.offsetTop, 10)) + PIN_HEIGHT / 2;
     var inputAdress = adForm.querySelector('#address');
 
     inputAdress.setAttribute('value', locationX + ', ' + locationY);
   };
 
+  // Функция перехода в активное состояние
   var activateState = function () {
     showMap.classList.remove('map--faded');
     containerPin.appendChild(getPins());
@@ -282,6 +282,7 @@
     onPinClick();
   };
 
+  // Функция удаления активной карточки
   var closeCardPopup = function () {
     var card = document.querySelector('.map__card');
     if (card) {
@@ -289,6 +290,7 @@
     }
   };
 
+  // Функция отрисовки активной карточки
   var activateCardPopup = function (pinId) {
     var card = document.querySelector('.map__card');
     if (card) {
@@ -298,6 +300,7 @@
     showMap.insertBefore(newCard, mapFiltersContainer);
   };
 
+  // Функция открытия, закрытия и смены карточек
   var onPinClick = function () {
     var pinList = containerPin.querySelectorAll('.map__pin:not(.map__pin--main)');
     for (var i = 0; i < pinList.length; i++) {
@@ -321,7 +324,6 @@
     }
   };
 
-
   mapPin.addEventListener('mouseup', function (evt) {
     evt.preventDefault();
     activateState();
@@ -330,6 +332,7 @@
 
   mapPin.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEY) {
+      evt.preventDefault();
       activateState();
       getLocationMapPinMain();
     }
