@@ -14,10 +14,10 @@
   ];
 
   var OFFER_TYPE = {
-    palace: 'Дворец',
-    flat: 'Квартира',
-    house: 'Дом',
-    bungalo: 'Бунагло'
+    'palace': 'Дворец',
+    'flat': 'Квартира',
+    'house': 'Дом',
+    'bungalo': 'Бунгало'
   };
 
   var OFFER_TIME = [
@@ -272,6 +272,7 @@
     var inputAdress = adForm.querySelector('#address');
 
     inputAdress.setAttribute('value', locationX + ', ' + locationY);
+    inputAdress.setAttribute('readonly', 'readonly');
   };
 
   // Функция перехода в активное состояние
@@ -337,4 +338,104 @@
       getLocationMapPinMain();
     }
   });
+
+  // Модуль 4.2
+
+  var inputTitle = adForm.querySelector('#title');
+  var inputPrice = adForm.querySelector('#price');
+  var inputType = adForm.querySelector('#type');
+  var capacity = adForm.querySelector('#capacity');
+  var inputOption = capacity.querySelectorAll('option');
+  var inputRoom = adForm.querySelector('#room_number');
+  var inputTimeIn = adForm.querySelector('#timein');
+  var inputTimeOut = adForm.querySelector('#timeout');
+
+  inputTitle.addEventListener('invalid', function () {
+    if (inputTitle.validity.tooShort) {
+      inputTitle.setCustomValidity('Минимальная длина заголовка — 30 символов');
+    } else if (inputTitle.validity.tooLong) {
+      inputTitle.setCustomValidity('Максимальная длина заголовка — 100 символов');
+    } else if (inputTitle.validity.valueMissing) {
+      inputTitle.setCustomValidity('Обязательное поле для ввода');
+    } else {
+      inputTitle.setCustomValidity('');
+    }
+  });
+  inputTitle.addEventListener('change', function (evt) {
+    var target = evt.target;
+    if (inputTitle.validity.valid) {
+      target.setCustomValidity('');
+    } else if (target.value.length < 30) {
+      target.setCustomValidity('Имя должно состоять из 30 символов');
+    }
+  });
+
+  var getPrice = function (evt) {
+    var value = evt.target.value;
+    switch (value) {
+      case 'bungalo':
+        inputPrice.min = 0;
+        inputPrice.value = 0;
+        break;
+      case 'house':
+        inputPrice.min = 5000;
+        inputPrice.value = 5000;
+        break;
+      case 'flat':
+        inputPrice.min = 1000;
+        inputPrice.value = 1000;
+        break;
+      case 'palace':
+        inputPrice.min = 10000;
+        inputPrice.value = 10000;
+        break;
+    }
+  };
+
+  var getRoom = function (evt) {
+    var value = evt.target.value;
+    switch (value) {
+      case '1':
+        inputOption[0].disabled = true;
+        inputOption[1].disabled = true;
+        inputOption[2].disabled = false;
+        inputOption[2].selected = true;
+        inputOption[3].disabled = true;
+        break;
+      case '2':
+        inputOption[0].disabled = true;
+        inputOption[1].disabled = false;
+        inputOption[1].selected = true;
+        inputOption[2].disabled = false;
+        inputOption[3].disabled = true;
+        break;
+      case '3':
+        inputOption[0].disabled = false;
+        inputOption[0].selected = true;
+        inputOption[1].disabled = false;
+        inputOption[2].disabled = false;
+        inputOption[3].disabled = true;
+        break;
+      case '100':
+        inputOption[0].disabled = true;
+        inputOption[1].disabled = true;
+        inputOption[2].disabled = true;
+        inputOption[3].selected = true;
+        inputOption[3].disabled = false;
+        break;
+    }
+  };
+
+  inputType.addEventListener('input', getPrice);
+  inputRoom.addEventListener('change', getRoom);
+
+  inputTimeIn.addEventListener('change', function (evt) {
+    inputTimeOut.value = evt.target.value;
+  });
+  inputTimeOut.addEventListener('change', function (evt) {
+    inputTimeIn.value = evt.target.value;
+  });
+
+
 })();
+
