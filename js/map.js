@@ -266,7 +266,7 @@
   };
 
   // Функция получения координат главной точки
-  var getLocationMapPinMain = function () {
+  var locationMapPinMain = function () {
     var locationX = Math.round(parseInt(mapPin.offsetLeft, 10)) + PIN_WIDTH / 2;
     var locationY = Math.round(parseInt(mapPin.offsetTop, 10)) + PIN_HEIGHT / 2;
     var inputAdress = adForm.querySelector('#address');
@@ -299,9 +299,14 @@
     }
     var newCard = renderCard(adwertisments[pinId]);
     showMap.insertBefore(newCard, mapFiltersContainer);
+
+    var closeButton = document.querySelector('.popup__close');
+    closeButton.addEventListener('click', function () {
+      closeCardPopup();
+    });
   };
 
-  // Функция открытия, закрытия и смены карточек
+  // Функция активации смены карточек
   var onPinClick = function () {
     var pinList = containerPin.querySelectorAll('.map__pin:not(.map__pin--main)');
     for (var i = 0; i < pinList.length; i++) {
@@ -310,32 +315,26 @@
         var button = evt.currentTarget;
         var pinId = button.getAttribute('data-id');
         activateCardPopup(pinId);
-
-        var closeButton = document.querySelector('.popup__close');
-        closeButton.addEventListener('click', function () {
-          closeCardPopup();
-        });
-      });
-
-      document.addEventListener('keydown', function (evt) {
-        if (evt.keyCode === ESC_KEY) {
-          closeCardPopup();
-        }
       });
     }
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEY) {
+        closeCardPopup();
+      }
+    });
   };
 
   mapPin.addEventListener('mouseup', function (evt) {
     evt.preventDefault();
     activateState();
-    getLocationMapPinMain();
+    locationMapPinMain();
   });
 
   mapPin.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEY) {
       evt.preventDefault();
       activateState();
-      getLocationMapPinMain();
+      locationMapPinMain();
     }
   });
 
