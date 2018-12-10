@@ -51,13 +51,13 @@
             <option value="low">до 10000&#x20bd;</option>
             <option value="high">от 50000&#x20bd;</option>
           </select>
-          <select name="housing-rooms" id="housing-rooms" class="map__filter" required>
+          <select name="housing-rooms" id="housing-rooms" class="map__filter">
             <option value="any" selected>Любое число комнат</option>
             <option value="1">Одна комната</option>
             <option value="2">Две комнаты</option>
             <option value="3">Три комнаты</option>
           </select>
-          <select name="housing-guests" id="housing-guests" class="map__filter" required>
+          <select name="housing-guests" id="housing-guests" class="map__filter">
             <option value="any" selected>Любое число гостей</option>
             <option value="2">Два гостя</option>
             <option value="1">Один гость</option>
@@ -84,7 +84,7 @@
     <!-- Форма объявления -->
     <section class="notice">
       <h2 class="notice__title">Ваше объявление</h2>
-      <form class="ad-form ad-form--disabled" method="post" enctype="multipart/form-data" autocomplete="off" action="https://js.dump.academy/keksobooking" >
+      <form class="ad-form ad-form--disabled" action="https://js.dump.academy/keksobooking" method="post" enctype="multipart/form-data" autocomplete="off">
         <fieldset class="ad-form-header">
           <legend class="ad-form-header__title">Ваша фотография (для карты)</legend>
           <div class="ad-form-header__upload">

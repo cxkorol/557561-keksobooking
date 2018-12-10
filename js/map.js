@@ -14,10 +14,10 @@
   ];
 
   var OFFER_TYPE = {
-    'palace': 'Дворец',
-    'flat': 'Квартира',
-    'house': 'Дом',
-    'bungalo': 'Бунгало'
+    palace: 'Дворец',
+    flat: 'Квартира',
+    house: 'Дом',
+    bungalo: 'Бунагло'
   };
 
   var OFFER_TIME = [
@@ -391,42 +391,25 @@
     }
   };
 
-  var getRoom = function (evt) {
+  var guestQuantity = {
+    '1': [true, true, false, true],
+    '2': [true, false, false, true],
+    '3': [false, false, false, true],
+    '100': [true, true, true, false],
+  };
+
+  var roomNumberHandler = function (evt) {
     var value = evt.target.value;
-    switch (value) {
-      case '1':
-        inputOption[0].disabled = true;
-        inputOption[1].disabled = true;
-        inputOption[2].disabled = false;
-        inputOption[2].selected = true;
-        inputOption[3].disabled = true;
-        break;
-      case '2':
-        inputOption[0].disabled = true;
-        inputOption[1].disabled = false;
-        inputOption[1].selected = true;
-        inputOption[2].disabled = false;
-        inputOption[3].disabled = true;
-        break;
-      case '3':
-        inputOption[0].disabled = false;
-        inputOption[0].selected = true;
-        inputOption[1].disabled = false;
-        inputOption[2].disabled = false;
-        inputOption[3].disabled = true;
-        break;
-      case '100':
-        inputOption[0].disabled = true;
-        inputOption[1].disabled = true;
-        inputOption[2].disabled = true;
-        inputOption[3].selected = true;
-        inputOption[3].disabled = false;
-        break;
+    for (var i = 0; i < inputOption.length; i++) {
+      inputOption[i].disabled = guestQuantity[value][i];
+      if (inputOption[i].disabled === true) {
+        inputOption[i].selected = false;
+      }
     }
   };
 
   inputType.addEventListener('input', getPrice);
-  inputRoom.addEventListener('change', getRoom);
+  inputRoom.addEventListener('change', roomNumberHandler);
 
   inputTimeIn.addEventListener('change', function (evt) {
     inputTimeOut.value = evt.target.value;
@@ -437,4 +420,3 @@
 
 
 })();
-
