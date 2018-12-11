@@ -17,11 +17,7 @@
     palace: 'Дворец',
     flat: 'Квартира',
     house: 'Дом',
-<<<<<<< HEAD
-    bungalo: 'Бунагло'
-=======
     bungalo: 'Бунгало'
->>>>>>> module4-task2b
   };
 
   var OFFER_TIME = [
