@@ -17,7 +17,11 @@
     palace: 'Дворец',
     flat: 'Квартира',
     house: 'Дом',
+<<<<<<< HEAD
     bungalo: 'Бунагло'
+=======
+    bungalo: 'Бунгало'
+>>>>>>> module4-task2b
   };
 
   var OFFER_TIME = [
@@ -280,7 +284,7 @@
     showMap.classList.remove('map--faded');
     containerPin.appendChild(getPins());
     removeDisabled();
-    onPinClick();
+    addPinsClickListeners();
   };
 
   // Функция удаления активной карточки
@@ -306,8 +310,8 @@
     });
   };
 
-  // Функция активации смены карточек
-  var onPinClick = function () {
+  // Функция активации кликов для смены карточек
+  var addPinsClickListeners = function () {
     var pinList = containerPin.querySelectorAll('.map__pin:not(.map__pin--main)');
     for (var i = 0; i < pinList.length; i++) {
 
@@ -317,11 +321,6 @@
         activateCardPopup(pinId);
       });
     }
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEY) {
-        closeCardPopup();
-      }
-    });
   };
 
   mapPin.addEventListener('mouseup', function (evt) {
@@ -338,9 +337,14 @@
     }
   });
 
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESC_KEY) {
+      closeCardPopup();
+    }
+  });
+
   // Модуль 4.2
 
-  var inputTitle = adForm.querySelector('#title');
   var inputPrice = adForm.querySelector('#price');
   var inputType = adForm.querySelector('#type');
   var capacity = adForm.querySelector('#capacity');
@@ -348,26 +352,6 @@
   var inputRoom = adForm.querySelector('#room_number');
   var inputTimeIn = adForm.querySelector('#timein');
   var inputTimeOut = adForm.querySelector('#timeout');
-
-  inputTitle.addEventListener('invalid', function () {
-    if (inputTitle.validity.tooShort) {
-      inputTitle.setCustomValidity('Минимальная длина заголовка — 30 символов');
-    } else if (inputTitle.validity.tooLong) {
-      inputTitle.setCustomValidity('Максимальная длина заголовка — 100 символов');
-    } else if (inputTitle.validity.valueMissing) {
-      inputTitle.setCustomValidity('Обязательное поле для ввода');
-    } else {
-      inputTitle.setCustomValidity('');
-    }
-  });
-  inputTitle.addEventListener('change', function (evt) {
-    var target = evt.target;
-    if (inputTitle.validity.valid) {
-      target.setCustomValidity('');
-    } else if (target.value.length < 30) {
-      target.setCustomValidity('Имя должно состоять из 30 символов');
-    }
-  });
 
   var getPrice = function (evt) {
     var value = evt.target.value;
@@ -401,7 +385,7 @@
   var roomNumberHandler = function (evt) {
     var value = evt.target.value;
     for (var i = 0; i < inputOption.length; i++) {
-      inputOption[i].selected = true;
+      inputOption[i].selected = false;
       inputOption[i].disabled = guestQuantity[value][i];
       if (inputOption[i].disabled === true) {
         inputOption[i].selected = false;
@@ -418,6 +402,5 @@
   inputTimeOut.addEventListener('change', function (evt) {
     inputTimeIn.value = evt.target.value;
   });
-
 
 })();
