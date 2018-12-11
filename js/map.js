@@ -401,6 +401,7 @@
   var roomNumberHandler = function (evt) {
     var value = evt.target.value;
     for (var i = 0; i < inputOption.length; i++) {
+      inputOption[i].selected = true;
       inputOption[i].disabled = guestQuantity[value][i];
       if (inputOption[i].disabled === true) {
         inputOption[i].selected = false;
