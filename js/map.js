@@ -279,7 +279,7 @@
     showMap.classList.remove('map--faded');
     containerPin.appendChild(getPins());
     removeDisabled();
-    onPinClick();
+    addPinsClickListeners();
   };
 
   // Функция удаления активной карточки
@@ -305,8 +305,8 @@
     });
   };
 
-  // Функция активации смены карточек
-  var onPinClick = function () {
+  // Функция активации кликов для смены карточек
+  var addPinsClickListeners = function () {
     var pinList = containerPin.querySelectorAll('.map__pin:not(.map__pin--main)');
     for (var i = 0; i < pinList.length; i++) {
 
@@ -316,11 +316,6 @@
         activateCardPopup(pinId);
       });
     }
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEY) {
-        closeCardPopup();
-      }
-    });
   };
 
   mapPin.addEventListener('mouseup', function (evt) {
@@ -334,6 +329,12 @@
       evt.preventDefault();
       activateState();
       locationMapPinMain();
+    }
+  });
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESC_KEY) {
+      closeCardPopup();
     }
   });
 })();
