@@ -432,10 +432,10 @@
         newCoordsX = pinLimits.maxX;
       }
       if (newCoordsY < pinLimits.minY) {
-        newCoordsY = pinLimits.minX;
+        newCoordsY = pinLimits.minY;
       }
-      if (newCoordsY > pinLimits.maxX) {
-        newCoordsY = pinLimits.maxX;
+      if (newCoordsY > pinLimits.maxY) {
+        newCoordsY = pinLimits.maxY;
       }
 
       mapPin.style.top = newCoordsY + 'px';
