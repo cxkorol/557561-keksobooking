@@ -355,7 +355,7 @@
   var inputTimeIn = adForm.querySelector('#timein');
   var inputTimeOut = adForm.querySelector('#timeout');
 
-  var priceValue = function (evt) {
+  var changePriceInput = function (evt) {
     var value = evt.target.value;
     inputPrice.min = OFFER[value].minPrice;
     inputPrice.placeholder = OFFER[value].defaultPrice;
@@ -379,7 +379,7 @@
     }
   };
 
-  inputType.addEventListener('input', priceValue);
+  inputType.addEventListener('input', changePriceInput);
   inputRoom.addEventListener('change', roomNumberHandler);
 
   inputTimeIn.addEventListener('change', function (evt) {
