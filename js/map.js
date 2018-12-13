@@ -13,11 +13,23 @@
     'Неуютное бунгало по колено в воде'
   ];
 
-  var OFFER_TYPE = {
-    palace: 'Дворец',
-    flat: 'Квартира',
-    house: 'Дом',
-    bungalo: 'Бунагло'
+  var OFFER = {
+    palace: {
+      title: 'Дворец',
+      minPrice: 10000,
+      defaultPrice: 10000},
+    flat: {
+      title: 'Квартира',
+      minPrice: 1000,
+      defaultPrice: 1000},
+    house: {
+      title: 'Дом',
+      minPrice: 5000,
+      defaultPrice: 5000},
+    bungalo: {
+      title: 'Бунгало',
+      minPrice: 0,
+      defaultPrice: 0}
   };
 
   var OFFER_TIME = [
@@ -118,7 +130,7 @@
     var coordinateY = getRandom(MIN_COORDINATE_Y, MAX_COORDINATE_Y);
     var adress = coordinateX + ', ' + coordinateY;
     var price = getRandom(MIN_PRICE, MAX_PRICE);
-    var type = getRandomProperty(OFFER_TYPE);
+    var type = getRandomProperty(OFFER).title;
     var rooms = getRandom(MIN_ROOMS, MAX_ROOMS);
     var guests = getRandom(MIN_GUESTS, MAX_GUESTS);
     var checkin = OFFER_TIME[getRandomUp(OFFER_TIME.length)];
@@ -272,6 +284,7 @@
     var inputAdress = adForm.querySelector('#address');
 
     inputAdress.setAttribute('value', locationX + ', ' + locationY);
+    inputAdress.setAttribute('readonly', 'readonly');
   };
 
   // Функция перехода в активное состояние
@@ -318,12 +331,6 @@
     }
   };
 
-  mapPin.addEventListener('mouseup', function (evt) {
-    evt.preventDefault();
-    activateState();
-    locationMapPinMain();
-  });
-
   mapPin.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEY) {
       evt.preventDefault();
@@ -337,4 +344,49 @@
       closeCardPopup();
     }
   });
+
+  // Модуль 4.2
+
+  var inputPrice = adForm.querySelector('#price');
+  var inputType = adForm.querySelector('#type');
+  var capacity = adForm.querySelector('#capacity');
+  var inputOption = capacity.querySelectorAll('option');
+  var inputRoom = adForm.querySelector('#room_number');
+  var inputTimeIn = adForm.querySelector('#timein');
+  var inputTimeOut = adForm.querySelector('#timeout');
+
+  var changePriceInput = function (evt) {
+    var value = evt.target.value;
+    inputPrice.min = OFFER[value].minPrice;
+    inputPrice.placeholder = OFFER[value].defaultPrice;
+  };
+
+  var guestQuantity = {
+    '1': [true, true, false, true],
+    '2': [true, false, false, true],
+    '3': [false, false, false, true],
+    '100': [true, true, true, false],
+  };
+
+  var roomNumberHandler = function (evt) {
+    var value = evt.target.value;
+    for (var i = 0; i < inputOption.length; i++) {
+      inputOption[i].selected = true;
+      inputOption[i].disabled = guestQuantity[value][i];
+      if (inputOption[i].disabled === true) {
+        inputOption[i].selected = false;
+      }
+    }
+  };
+
+  inputType.addEventListener('input', changePriceInput);
+  inputRoom.addEventListener('change', roomNumberHandler);
+
+  inputTimeIn.addEventListener('change', function (evt) {
+    inputTimeOut.value = evt.target.value;
+  });
+  inputTimeOut.addEventListener('change', function (evt) {
+    inputTimeIn.value = evt.target.value;
+  });
+
 })();
