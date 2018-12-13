@@ -358,7 +358,7 @@
   var priceValue = function (evt) {
     var value = evt.target.value;
     inputPrice.min = OFFER[value].minPrice;
-    inputPrice.value = OFFER[value].defaultPrice;
+    inputPrice.placeholder = OFFER[value].defaultPrice;
   };
 
   var guestQuantity = {
