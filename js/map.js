@@ -410,6 +410,7 @@
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
+      dragged = true;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -425,20 +426,21 @@
       var newCoordsY = mapPin.offsetTop - shift.y;
 
       if (newCoordsX < pinLimits.minX) {
-        shift.x = pinLimits.minX;
+        newCoordsX = pinLimits.minX;
       }
       if (newCoordsX > pinLimits.maxX) {
-        shift.x = pinLimits.maxX;
+        newCoordsX = pinLimits.maxX;
       }
       if (newCoordsY < pinLimits.minY) {
-        shift.x = pinLimits.minX;
+        newCoordsY = pinLimits.minX;
       }
       if (newCoordsY > pinLimits.maxX) {
-        shift.x = pinLimits.maxX;
+        newCoordsY = pinLimits.maxX;
       }
 
       mapPin.style.top = newCoordsY + 'px';
       mapPin.style.left = newCoordsX + 'px';
+
     };
 
     var onMouseUp = function (upEvt) {
@@ -446,8 +448,8 @@
       locationMapPinMain();
       activateState();
 
-      mapPin.removeEventListener('mousemove', onMouseMove);
-      mapPin.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
         var onClickPreventDefault = function (prevEvt) {
@@ -458,8 +460,8 @@
       }
     };
 
-    mapPin.addEventListener('mousemove', onMouseMove);
-    mapPin.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
 
   });
 
