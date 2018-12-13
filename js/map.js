@@ -400,7 +400,6 @@
 
   mapPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-    activateState();
 
     var startCoords = {
       x: evt.clientX,
@@ -445,6 +444,7 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
       locationMapPinMain();
+      activateState();
 
       mapPin.removeEventListener('mousemove', onMouseMove);
       mapPin.removeEventListener('mouseup', onMouseUp);
