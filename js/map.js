@@ -447,7 +447,7 @@
       upEvt.preventDefault();
       locationMapPinMain();
 
-      if (showMap.classList.contains('map--faded') === true) {
+      if (showMap.classList.contains('map--faded')) {
         activateState();
       }
 
