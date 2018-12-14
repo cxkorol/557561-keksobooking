@@ -453,6 +453,7 @@
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+      mapPin.removeListener('mouseup', activateState);
 
       if (dragged) {
         var onClickPreventDefault = function (prevEvt) {
