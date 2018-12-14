@@ -412,10 +412,6 @@
       moveEvt.preventDefault();
       dragged = true;
 
-      if (showMap.classList.contains('map--faded') === true) {
-        activateState();
-      }
-
       var shift = {
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY
@@ -450,6 +446,10 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
       locationMapPinMain();
+
+      if (showMap.classList.contains('map--faded') === true) {
+        activateState();
+      }
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
