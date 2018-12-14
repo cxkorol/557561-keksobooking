@@ -445,8 +445,11 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      locationMapPinMain();
-      activateState();
+
+      if (showMap.classList.contains('map--faded') === true) {
+        locationMapPinMain();
+        activateState();
+      }
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
