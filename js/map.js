@@ -401,10 +401,6 @@
   mapPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    if (showMap.classList.contains('map--faded')) {
-      activateState();
-    }
-
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -450,6 +446,10 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
       locationMapPinMain();
+
+      if (showMap.classList.contains('map--faded')) {
+        activateState();
+      }
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
