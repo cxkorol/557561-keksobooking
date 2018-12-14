@@ -465,6 +465,7 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+    mapPin.addEventListener('mouseup', activateState);
 
   });
 
