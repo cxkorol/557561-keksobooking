@@ -401,6 +401,10 @@
   mapPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
+    if (showMap.classList.contains('map--faded')) {
+      activateState();
+    }
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -447,13 +451,8 @@
       upEvt.preventDefault();
       locationMapPinMain();
 
-      if (showMap.classList.contains('map--faded')) {
-        activateState();
-      }
-
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-      mapPin.removeEventListener('mouseup', activateState);
 
       if (dragged) {
         var onClickPreventDefault = function (prevEvt) {
@@ -466,7 +465,6 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-    mapPin.addEventListener('mouseup', activateState);
 
   });
 
