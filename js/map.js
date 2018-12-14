@@ -395,7 +395,7 @@
     minY: 130 - PIN_HEIGHT,
     maxY: 630,
     minX: 0 - PIN_WIDTH / 2,
-    maxX: containerPin.offsetWidth - PIN_WIDTH / 2
+    maxX: containerPin.offsetWidth - PIN_WIDTH / 1.5
   };
 
   mapPin.addEventListener('mousedown', function (evt) {
