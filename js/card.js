@@ -1,57 +1,14 @@
 'use strict';
 
 window.card = (function () {
-  var similarMapCard = document.querySelector('#card').content.querySelector('.map__card');
 
-  // Функция создания случайного объявления
-  var createRandomAdw = function (index) {
-    var avatar = 'img/avatars/user0' + (index + 1) + '.png';
-    var title = window.data.OFFER_TITLE[index];
-    var coordinateX = window.util.getRandom(window.data.MIN_COORDINATE_X, window.data.MAX_COORDINATE_X);
-    var coordinateY = window.util.getRandom(window.data.MIN_COORDINATE_Y, window.data.MAX_COORDINATE_Y);
-    var adress = coordinateX + ', ' + coordinateY;
-    var price = window.util.getRandom(window.data.MIN_PRICE, window.data.MAX_PRICE);
-    var type = window.util.getRandomProperty(window.data.OFFER).title;
-    var rooms = window.util.getRandom(window.data.MIN_ROOMS, window.data.MAX_ROOMS);
-    var guests = window.util.getRandom(window.data.MIN_GUESTS, window.data.MAX_GUESTS);
-    var checkin = window.data.OFFER_TIME[window.util.getRandomUp(window.data.OFFER_TIME.length)];
-    var checkout = window.data.OFFER_TIME[window.util.getRandomUp(window.data.OFFER_TIME.length)];
-    var features = window.util.getNewArrayFeature(window.data.OFFER_FEATURES);
-    var description = '';
-    var photos = window.util.shuffleArr(window.data.OFFER_PHOTOS).slice();
-
-    // Cоздание объекта объявлений
-    return {
-      author: {
-        avatar: avatar
-      },
-
-      offer: {
-        title: title,
-        adress: adress,
-        price: price,
-        type: type,
-        rooms: rooms,
-        guests: guests,
-        checkin: checkin,
-        checkout: checkout,
-        features: features,
-        description: description,
-        photos: photos
-      },
-
-      location: {
-        coordX: coordinateX,
-        coordY: coordinateY
-      }
-    };
-  };
+  var templateMapCard = document.querySelector('#card').content.querySelector('.map__card');
 
   // Функция создания массива объявлений
   var createAdwArray = function (index) {
     var adwertisments = [];
     for (var i = 0; i < index; i++) {
-      adwertisments[i] = createRandomAdw(i);
+      adwertisments[i] = window.data.createRandomAdw(i);
     }
     return adwertisments;
   };
@@ -83,7 +40,7 @@ window.card = (function () {
 
   // Функция создание и отрисовки карточки на карте
   var renderCard = function (adwertisments) {
-    var cardElement = similarMapCard.cloneNode(true);
+    var cardElement = templateMapCard.cloneNode(true);
 
     cardElement.querySelector('.popup__title').textContent = adwertisments.offer.title;
     cardElement.querySelector('.popup__text--address').textContent = adwertisments.offer.adress;

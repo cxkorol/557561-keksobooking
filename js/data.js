@@ -79,6 +79,50 @@
   var ENTER_KEY = 13;
   var ESC_KEY = 27;
 
+  // Функция создания случайного объявления
+  var createRandomAdw = function (index) {
+    var avatar = 'img/avatars/user0' + (index + 1) + '.png';
+    var title = OFFER_TITLE[index];
+    var coordinateX = window.util.getRandom(MIN_COORDINATE_X, MAX_COORDINATE_X);
+    var coordinateY = window.util.getRandom(MIN_COORDINATE_Y, MAX_COORDINATE_Y);
+    var adress = coordinateX + ', ' + coordinateY;
+    var price = window.util.getRandom(MIN_PRICE, MAX_PRICE);
+    var type = window.util.getRandomProperty(OFFER).title;
+    var rooms = window.util.getRandom(MIN_ROOMS, MAX_ROOMS);
+    var guests = window.util.getRandom(MIN_GUESTS, MAX_GUESTS);
+    var checkin = window.data.OFFER_TIME[window.util.getRandomUp(OFFER_TIME.length)];
+    var checkout = window.data.OFFER_TIME[window.util.getRandomUp(OFFER_TIME.length)];
+    var features = window.util.getNewArrayFeature(OFFER_FEATURES);
+    var description = '';
+    var photos = window.util.shuffleArr(OFFER_PHOTOS).slice();
+
+    // Cоздание объекта объявлений
+    return {
+      author: {
+        avatar: avatar
+      },
+
+      offer: {
+        title: title,
+        adress: adress,
+        price: price,
+        type: type,
+        rooms: rooms,
+        guests: guests,
+        checkin: checkin,
+        checkout: checkout,
+        features: features,
+        description: description,
+        photos: photos
+      },
+
+      location: {
+        coordX: coordinateX,
+        coordY: coordinateY
+      }
+    };
+  };
+
   window.data = {
     OFFER_TITLE: OFFER_TITLE,
     OFFER: OFFER,
@@ -101,7 +145,8 @@
     MAX_GUESTS: MAX_GUESTS,
     OFFER_QUANTITY: OFFER_QUANTITY,
     ENTER_KEY: ENTER_KEY,
-    ESC_KEY: ESC_KEY
+    ESC_KEY: ESC_KEY,
+    createRandomAdw: createRandomAdw
   };
 
 })();
