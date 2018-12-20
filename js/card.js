@@ -42,6 +42,9 @@ window.card = (function () {
   var renderCard = function (adwertisments) {
     var cardElement = templateMapCard.cloneNode(true);
 
+    var closeButton = cardElement.querySelector('.popup__close');
+    window.map.addCardClickListeners(closeButton);
+
     cardElement.querySelector('.popup__title').textContent = adwertisments.offer.title;
     cardElement.querySelector('.popup__text--address').textContent = adwertisments.offer.adress;
     cardElement.querySelector('.popup__text--price').textContent = adwertisments.offer.price + '₽/ночь';

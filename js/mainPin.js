@@ -27,7 +27,6 @@ window.mainPin = (function () {
     inputAdress.setAttribute('value', location.x + ', ' + location.y);
     inputAdress.setAttribute('readonly', 'readonly');
   };
-
   mapPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
@@ -105,4 +104,10 @@ window.mainPin = (function () {
     }
   });
 
+  return {
+    setAddressAttribute: setAddressAttribute,
+    getMapPinMain: getMapPinMain
+  };
+
 })();
+

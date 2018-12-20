@@ -56,6 +56,9 @@
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
 
+  var PINMAIN_START_X = 570;
+  var PINMAIN_START_Y = 375;
+
   var PHOTO_WIDTH = 45;
   var PHOTO_HEIGHT = 40;
 
@@ -123,6 +126,8 @@
     };
   };
 
+  var advertisments = [];
+
   window.data = {
     OFFER_TITLE: OFFER_TITLE,
     OFFER: OFFER,
@@ -131,6 +136,8 @@
     OFFER_PHOTOS: OFFER_PHOTOS,
     PIN_WIDTH: PIN_WIDTH,
     PIN_HEIGHT: PIN_HEIGHT,
+    PINMAIN_START_X: PINMAIN_START_X,
+    PINMAIN_START_Y: PINMAIN_START_Y,
     PHOTO_WIDTH: PHOTO_WIDTH,
     PHOTO_HEIGHT: PHOTO_HEIGHT,
     MIN_PRICE: MIN_PRICE,
@@ -146,7 +153,8 @@
     OFFER_QUANTITY: OFFER_QUANTITY,
     ENTER_KEY: ENTER_KEY,
     ESC_KEY: ESC_KEY,
-    createRandomAdw: createRandomAdw
+    createRandomAdw: createRandomAdw,
+    advertisments: advertisments
   };
 
 })();
