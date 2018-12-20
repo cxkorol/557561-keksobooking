@@ -74,7 +74,7 @@ window.map = (function () {
     showMap.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
 
-    mapPin.style.left = window.dataPINMAIN_START_X + 'px';
+    mapPin.style.left = window.data.PINMAIN_START_X + 'px';
     mapPin.style.top = window.data.PINMAIN_START_Y + 'px';
 
     closeCardPopup();
@@ -83,7 +83,7 @@ window.map = (function () {
 
   var saveForm = function () {
     onSubmit();
-    window.pins.showSuccess();
+    window.pins.onSuccess();
   };
 
   // Функция перехода в активное состояние
